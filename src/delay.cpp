@@ -275,6 +275,15 @@ initialise_delay() {
     5,
     60
   };
+
+  const char * afMaximumDelayStrs[DELAY_LENGTH_COUNT] = {
+    "0.01",
+    "0.1",
+    "1",
+    "5",
+    "60"
+  };
+
   LADSPA_Instantiate_Function afInstantiateFunctions[DELAY_LENGTH_COUNT] = {
     CMT_Delay_Instantiate<10>,
     CMT_Delay_Instantiate<100>,
@@ -296,14 +305,14 @@ initialise_delay() {
       
       char acLabel[100];
       sprintf(acLabel,
-	      "%s_%gs",
+	      "%s_%ss",
 	      apcDelayTypeLabels[lDelayTypeIndex],
-	      afMaximumDelays[lDelayLengthIndex]);
+	      afMaximumDelayStrs[lDelayLengthIndex]);
       char acName[100];
       sprintf(acName, 
-	      "%s Delay Line (Maximum Delay %gs)",
+	      "%s Delay Line (Maximum Delay %ss)",
 	      apcDelayTypeNames[lDelayTypeIndex],
-	      afMaximumDelays[lDelayLengthIndex]);
+	      afMaximumDelayStrs[lDelayLengthIndex]);
       
       psDescriptor = new CMT_Descriptor
 	(1053 + lPluginIndex,
